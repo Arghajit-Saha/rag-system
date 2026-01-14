@@ -40,14 +40,8 @@ Please provide a clear, helpful answer using only the information from this docu
 """
 
 messages = [
-    {
-        "role": "system",
-        "content": "You are a helpful assistant."
-    },
-    {
-        "role": "user",
-        "content": combined_input
-    }
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": combined_input}
 ]
 
 with OpenRouter(

@@ -11,7 +11,7 @@ A Retrieval-Augmented Generation (RAG) system built with LangChain, Ollama, Chro
 - **Smart Chunking**: Split documents into semantic chunks for efficient embedding.
 - **Vector Storage**: Store embeddings locally using **ChromaDB**.
 - **Local Embeddings**: Uses **Ollama** (`nomic-embed-text`) for privacy-preserving, local embeddings.
-- **Answer Generation**: Uses **OpenRouter** (accessing models like GPT-4o-mini) to generate natural language answers based on retrieved context.
+- **Conversational Retrieval**: Maintains chat history to allow follow-up questions using `history_aware_generation.py`.
 
 ## Tech Stack
 
@@ -77,26 +77,34 @@ python retrieval_pipeline.py
 ```
 *(Note: This uses a hardcoded query in the script)*
 
-### 3. Generate Answers
+### 3. Generate Answers (Single Turn)
 
-To ask questions and get generated answers based on your documents:
+To ask a single question:
 
 ```bash
 python answer_generation.py
 ```
 
-You will be prompted to enter your question. The system will retrieve relevant context and generate an answer using GPT-4o-mini via OpenRouter.
+### 4. Conversational Chat (History Aware)
+
+To have a multi-turn conversation where the system remembers context:
+
+```bash
+python history_aware_generation.py
+```
+This script rephrases follow-up questions to be standalone before retrieving context, allowing for a natural conversation flow.
 
 ## Project Structure
 
 ```
 .
-├── db/                   # ChromaDB persistence directory
-├── docs/                 # Source text documents
-├── answer_generation.py  # RAG pipeline with LLM answer generation
-├── ingestion_pipeline.py # Document processing and embedding
-├── retrieval_pipeline.py # Context retrieval testing
-├── .env                  # Environment variables (API keys)
+├── db/                        # ChromaDB persistence directory
+├── docs/                      # Source text documents
+├── answer_generation.py       # Single-turn RAG QA
+├── history_aware_generation.py # Multi-turn conversational RAG
+├── ingestion_pipeline.py      # Document processing and embedding
+├── retrieval_pipeline.py      # Context retrieval testing
+├── .env                       # Environment variables (API keys)
 ├── .gitignore
 └── README.md
 ```
